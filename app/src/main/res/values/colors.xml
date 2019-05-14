@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#33BFDA</color>
+
+
+    <color name="white">#ffffff</color>
+    <color name="c_f8f8f4">#f8f8f4</color>
+    <color name="c_c888db7">#888db7</color>
+    <color name="c_999999">#999999</color>
+    <color name="c_transparent">#00000000</color>
+
+
+    <color name="title_backage">#33BFDA</color>
+    <color name="app_backage">#f1f1f1</color>
+    <color name="text_color">#757575</color>
+    <color name="btn_color">#2FD7DE</color>
+    <color name="vertical_line_color">#60FF5500</color>
+    <color name="horizontal_line_color">#f1f1f1</color>
+</resources>

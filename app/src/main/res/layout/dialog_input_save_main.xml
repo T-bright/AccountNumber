@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@drawable/dialog_backage"
+              android:gravity="center"
+              android:orientation="vertical"
+              android:paddingBottom="10dp"
+              android:paddingLeft="25dp"
+              android:paddingRight="25dp"
+              android:paddingTop="10dp">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
+            android:gravity="left|center"
+            android:orientation="horizontal">
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/login_id"/>
+
+        <EditText
+                android:id="@+id/account_type_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:backgroundTint="@color/white"
+                android:hint="清输入要添加的账号类型"
+                android:singleLine="true"
+                android:textColor="#000000"
+                android:textColorHint="#B3B3B3"
+                android:textCursorDrawable="@null"
+                android:textSize="16sp"/>
+    </LinearLayout>
+
+    <View
+            android:visibility="gone"
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/horizontal_line_color"
+            android:orientation="vertical"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
+            android:visibility="gone"
+            android:gravity="left|center"
+            android:orientation="horizontal">
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/login_id"/>
+
+        <EditText
+                android:id="@+id/account_type_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:backgroundTint="@color/white"
+                android:hint="清输入要添加的账号类型id"
+                android:singleLine="true"
+                android:textColor="#000000"
+                android:textColorHint="#B3B3B3"
+                android:textCursorDrawable="@null"
+                android:textSize="14sp"/>
+    </LinearLayout>
+
+    <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/horizontal_line_color"
+            android:orientation="vertical"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left|center"
+            android:orientation="horizontal">
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/details"/>
+
+        <EditText
+                android:id="@+id/account_type_describe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:backgroundTint="@color/white"
+                android:hint="清输入要添加的账号类型描述"
+                android:textColor="#000000"
+                android:textColorHint="#B3B3B3"
+                android:textCursorDrawable="@null"
+                android:textSize="16sp"/>
+    </LinearLayout>
+    <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/horizontal_line_color"
+            android:orientation="vertical"/>
+
+    <Button
+            android:id="@+id/make_sure"
+            android:layout_width="wrap_content"
+            android:layout_height="34dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:paddingRight="55dp"
+            android:paddingLeft="55dp"
+            android:background="@drawable/btn_backage"
+            android:text="确定"
+            android:textColor="@color/white"
+            android:textSize="19sp"/>
+</LinearLayout>

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="12dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginBottom="5dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="-10.5dp"
+        android:layout_marginTop="-3.5dp"
+        android:layout_toRightOf="@+id/vertical_line"
+        android:background="@mipmap/backage">
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:background="@color/vertical_line_color" />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:background="@color/vertical_line_color" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="58dp"
+            android:orientation="vertical">
+
+            <View
+                android:id="@+id/account_name_line"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/horizontal_line_color" />
+
+            <TextView
+                android:id="@+id/account_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/horizontal_line"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="15dp"
+                android:text="用  户  名："
+                android:textColor="@color/text_color" />
+
+            <View
+                android:id="@+id/password_line"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/horizontal_line_color" />
+
+            <TextView
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/horizontal_line"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="15dp"
+                android:text="密        码："
+                android:textColor="@color/text_color" />
+
+
+            <View
+                android:id="@+id/phone_number_line"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/horizontal_line_color" />
+
+            <TextView
+                android:id="@+id/phone_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/horizontal_line"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="15dp"
+                android:text="电       话："
+                android:textColor="@color/text_color" />
+
+            <View
+                android:id="@+id/mailbox_name_line"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/horizontal_line_color" />
+
+            <TextView
+                android:id="@+id/mailbox_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/horizontal_line"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="15dp"
+                android:text="邮        箱："
+                android:textColor="@color/text_color" />
+
+            <View
+                android:id="@+id/repertory_psw_line"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/horizontal_line_color" />
+
+            <TextView
+                android:id="@+id/repertory_psw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/horizontal_line"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="15dp"
+                android:text="仓库密码："
+                android:textColor="@color/text_color" />
+
+            <View
+                android:id="@+id/application_name_line"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginBottom="15dp"
+                android:background="@color/horizontal_line_color" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/vertical_line"
+        android:layout_width="6dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/btn_color">
+
+        <ImageView
+            android:layout_width="6dp"
+            android:layout_height="6dp"
+            android:layout_gravity="bottom"
+            android:src="@mipmap/triangle" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_toRightOf="@+id/vertical_line">
+
+        <TextView
+            android:id="@+id/application_name"
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:background="@drawable/card_backage"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"
+            android:paddingRight="15dp"
+            android:text="软件应用名称"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/delete"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginRight="15dp"
+            android:clickable="true"
+            android:src="@mipmap/delete" />
+
+
+        <ImageView
+            android:id="@+id/redact"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginRight="50dp"
+            android:clickable="true"
+            android:src="@mipmap/redact" />
+    </FrameLayout>
+
+
+</RelativeLayout>
+

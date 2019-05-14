@@ -1,0 +1,23 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+    </style>
+
+    <style name="SplashAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:background">@drawable/layer_splash</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <!--BaseDialog样式-->
+    <style name="BaseDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowSoftInputMode">adjustPan</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
+
+</resources>
