@@ -1,5 +1,5 @@
 # AccountNumber
-mvp+dagger+kotlin练手项目，写的比较粗糙。
+mvp+dagger+kotlin练手项目。
 
 本项目主要是用来练习kotlin的，类似记事本，不过主要是用来记录各种账号密码的。
 
@@ -27,3 +27,5 @@ mvp+dagger+kotlin练手项目，写的比较粗糙。
 - **implementation 'com.tencent.soter:soter-wrapper:1.3.12'  //腾讯指纹解锁**
 
 
+[TODO]{}
+**1、密码保存添加一个加密过程**
