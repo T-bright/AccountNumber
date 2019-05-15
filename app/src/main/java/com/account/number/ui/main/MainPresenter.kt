@@ -2,13 +2,17 @@ package com.account.number.ui.main
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.Lifecycle
 import com.account.number.db.AccountMain
 import com.account.number.db.DBManager
 import com.account.number.utils.fileutils.FileIoUtils
 import com.account.number.utils.fileutils.FilePathUtils
 import com.account.number.utils.fileutils.FileUtils
 import com.tbruyelle.rxpermissions2.RxPermissions
+import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
+import com.uber.autodispose.lifecycle.autoDisposable
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -22,16 +26,29 @@ class MainPresenter @Inject constructor() : MainContract.MainPresenter() {
     lateinit var dbManager: DBManager
 
     override fun loadData() {
-        mView!!.showLoading()
-        mView!!.loadDataSuccess(dbManager.queryMainData())
-        mView!!.hideLoading()
+        Observable.create(ObservableOnSubscribe<ArrayList<AccountMain>> { emitter ->
+            val queryMainDatas = dbManager.queryMainData()
+            emitter.onNext(queryMainDatas)
+        }).subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .autoDisposable(AndroidLifecycleScopeProvider.from(mView as MainFragment, Lifecycle.Event.ON_DESTROY))
+            .subscribe {
+                mView!!.loadDataSuccess(it)
+            }
     }
 
     override fun deleteData(accountTypeName: String) {
         mView!!.showLoading()
-        dbManager.deleteMainData(accountTypeName)
-        mView!!.hideLoading()
-        mView!!.deleteDataSuccess()
+        Observable.create(ObservableOnSubscribe<Int> { emitter ->
+            val type = dbManager.deleteMainData(accountTypeName)
+            emitter.onNext(type)
+        }).subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .autoDisposable(AndroidLifecycleScopeProvider.from(mView as MainFragment, Lifecycle.Event.ON_DESTROY))
+            .subscribe {
+                mView!!.hideLoading()
+                mView!!.deleteDataSuccess()
+            }
     }
 
 
@@ -83,6 +100,7 @@ class MainPresenter @Inject constructor() : MainContract.MainPresenter() {
             })
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
+            .autoDisposable(AndroidLifecycleScopeProvider.from(mView as MainFragment, Lifecycle.Event.ON_DESTROY))
             .subscribe {
                 mView!!.hideLoading()
                 mView!!.saveDataResult(it)

@@ -1,9 +1,17 @@
 package com.account.number.dialog
 
+import android.annotation.SuppressLint
 import android.text.TextUtils
+import androidx.lifecycle.Lifecycle
 import com.account.number.db.AccountList
 import com.account.number.db.AccountMain
 import com.account.number.db.DBManager
+import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
+import com.uber.autodispose.lifecycle.autoDisposable
+import io.reactivex.Observable
+import io.reactivex.ObservableOnSubscribe
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class DialogPresenter @Inject constructor() : DiaLogContract.DialogPresenter() {
@@ -11,28 +19,44 @@ class DialogPresenter @Inject constructor() : DiaLogContract.DialogPresenter() {
     @Inject
     lateinit var dbManager: DBManager
 
+    @SuppressLint("CheckResult")
     override fun addDataMain(newData: AccountMain) {
         mView!!.showLoading()
         if (checkMainDataIsNull(newData)) return
-        val type = dbManager.addMainData(newData)
-        if (type != -1L) {
-            mView!!.hideLoading()
-            mView!!.operationSuccess()
-        } else {
-            mView!!.showError("您插入的账号类型已存在")
-        }
+        Observable.create(ObservableOnSubscribe<Long> { emitter ->
+            val type = dbManager.addMainData(newData)
+            emitter.onNext(type)
+        }).subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .autoDisposable(AndroidLifecycleScopeProvider.from((mView as InputSaveDialog).activity, Lifecycle.Event.ON_DESTROY))
+            .subscribe {
+                if (it != -1L) {
+                    mView!!.hideLoading()
+                    mView!!.operationSuccess()
+                } else {
+                    mView!!.showError("您插入的账号类型已存在")
+                }
+            }
     }
 
+    @SuppressLint("CheckResult")
     override fun updateDataMain(newData: AccountMain, oldData: AccountMain?) {
         mView!!.showLoading()
         if (checkMainDataIsNull(newData)) return
-        val type = dbManager.updateMainData(oldData, newData)
-        if (type != -1) {
-            mView!!.hideLoading()
-            mView!!.operationSuccess()
-        } else {
-            mView!!.showError("未知错误")
-        }
+        Observable.create(ObservableOnSubscribe<Int> { emitter ->
+            val type = dbManager.updateMainData(oldData, newData)
+            emitter.onNext(type)
+        }).subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .autoDisposable(AndroidLifecycleScopeProvider.from((mView as InputSaveDialog).activity, Lifecycle.Event.ON_DESTROY))
+            .subscribe {
+                if (it != -1) {
+                    mView!!.hideLoading()
+                    mView!!.operationSuccess()
+                } else {
+                    mView!!.showError("未知错误")
+                }
+            }
     }
 
     private fun checkMainDataIsNull(newData: AccountMain): Boolean {
@@ -47,28 +71,43 @@ class DialogPresenter @Inject constructor() : DiaLogContract.DialogPresenter() {
     }
 
 
+    @SuppressLint("CheckResult")
     override fun addDataList(accountList: AccountList) {
         mView!!.showLoading()
         if (checkAccountListIsNull(accountList)) return
-        val type = dbManager.addAccountListData(accountList)
-        if (type != -1L) {
-            mView!!.hideLoading()
-            mView!!.operationSuccess()
-        } else {
-            mView!!.showError("您插入的账号已存在")
-        }
+
+        Observable.create(ObservableOnSubscribe<Long> { emitter ->
+            val type = dbManager.addAccountListData(accountList)
+            emitter.onNext(type)
+        }).subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                if (it != -1L) {
+                    mView!!.hideLoading()
+                    mView!!.operationSuccess()
+                } else {
+                    mView!!.showError("您插入的账号已存在")
+                }
+            }
     }
 
+    @SuppressLint("CheckResult")
     override fun updateDataList(newData: AccountList, oldData: AccountList?) {
         mView!!.showLoading()
         if (checkAccountListIsNull(newData)) return
-        val type = dbManager.updateAccountListData(oldData, newData)
-        if (type != -1) {
-            mView!!.hideLoading()
-            mView!!.operationSuccess()
-        } else {
-            mView!!.showError("未知错误")
-        }
+        Observable.create(ObservableOnSubscribe<Int> { emitter ->
+            val type = dbManager.updateAccountListData(oldData, newData)
+            emitter.onNext(type)
+        }).subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                if (it != -1) {
+                    mView!!.hideLoading()
+                    mView!!.operationSuccess()
+                } else {
+                    mView!!.showError("未知错误")
+                }
+            }
     }
 
     private fun checkAccountListIsNull(accountList: AccountList): Boolean {

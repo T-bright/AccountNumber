@@ -1,18 +1,18 @@
 package com.account.number.db
 
 import android.content.ContentValues
-import android.util.Log
 import com.account.number.extension.parseList
 import org.jetbrains.anko.db.select
 import javax.inject.Inject
 
 class DBManager @Inject constructor() {
+
     @Inject
     lateinit var databaseOpenHelper: DatabaseOpenHelper
 
     //添加数据
-    fun addMainData(accountMain: AccountMain) : Long{
-        var type = databaseOpenHelper.use {
+    fun addMainData(accountMain: AccountMain): Long {
+        var type = databaseOpenHelper?.use {
             val contentValues = ContentValues()
             contentValues.put("account_type_name", accountMain.account_type_name)
             contentValues.put("account_type_describe", accountMain.account_type_describe)
@@ -22,14 +22,15 @@ class DBManager @Inject constructor() {
     }
 
     //删除数据
-    fun deleteMainData(accountTypeName: String) {
+    fun deleteMainData(accountTypeName: String): Int {
         var type = databaseOpenHelper.use {
             delete(DatabaseOpenHelper.TableAccountMain.TABLE_NAME, "account_type_name = ?", Array<String>(1) { accountTypeName })
         }
+        return type
     }
 
     //修改数据
-    fun updateMainData(oldData: AccountMain?, newData: AccountMain) : Int {
+    fun updateMainData(oldData: AccountMain?, newData: AccountMain): Int {
         var type = databaseOpenHelper.use {
             val newContentValues = ContentValues()
             newContentValues.put("account_type_describe", newData.account_type_describe)
@@ -40,7 +41,7 @@ class DBManager @Inject constructor() {
 
     //查询数据
     fun queryMainData(): ArrayList<AccountMain> {
-        return databaseOpenHelper.use {
+        return databaseOpenHelper?.use {
             val mutableList = arrayListOf<AccountMain>()
 
             val parseList = databaseOpenHelper.use {
@@ -54,9 +55,8 @@ class DBManager @Inject constructor() {
     }
 
 
-
     //添加数据
-    fun addAccountListData(accountList: AccountList) : Long{
+    fun addAccountListData(accountList: AccountList): Long {
         var type = databaseOpenHelper.use {
             val contentValues = ContentValues()
             contentValues.put("account_type_name", accountList.account_type_name)
@@ -72,37 +72,40 @@ class DBManager @Inject constructor() {
     }
 
     //删除数据
-    fun deleteAccountListData(accountList: AccountList) {
+    fun deleteAccountListData(accountList: AccountList): Int {
         var type = databaseOpenHelper.use {
-            delete(DatabaseOpenHelper.TableAccountList.TABLE_NAME, "account_type_name = ?  and application_name = ? and account = ?",  arrayOf<String>(accountList!!.account_type_name,accountList.application_name,accountList.account))
+            delete(DatabaseOpenHelper.TableAccountList.TABLE_NAME, "account_type_name = ?  and application_name = ? and account = ?", arrayOf<String>(accountList!!.account_type_name, accountList.application_name, accountList.account))
         }
+        return type
     }
 
     //修改数据
-    fun updateAccountListData(oldData: AccountList?, newData: AccountList) : Int {
+    fun updateAccountListData(oldData: AccountList?, newData: AccountList): Int {
         var type = databaseOpenHelper.use {
             val newContentValues = ContentValues()
             newContentValues.put("password", newData.password)
             newContentValues.put("phone_number", newData.phone_number)
             newContentValues.put("associated_mailbox", newData.associated_mailbox)
             newContentValues.put("repository_password", newData.repository_password)
-            update(DatabaseOpenHelper.TableAccountList.TABLE_NAME, newContentValues, "account_type_name = ?  and application_name = ? and account = ?", arrayOf<String>(oldData!!.account_type_name,oldData.application_name,oldData.account))
+            update(DatabaseOpenHelper.TableAccountList.TABLE_NAME, newContentValues, "account_type_name = ?  and application_name = ? and account = ?", arrayOf<String>(oldData!!.account_type_name, oldData.application_name, oldData.account))
         }
         return type
     }
 
     //查询数据
-    fun queryAccountListData(accountTypeName : String): ArrayList<AccountList> {
-        return databaseOpenHelper.use {
+    fun queryAccountListData(accountTypeName: String): ArrayList<AccountList> {
+        return databaseOpenHelper?.use {
             val mutableList = arrayListOf<AccountList>()
 
             val parseList = databaseOpenHelper.use {
-                select(DatabaseOpenHelper.TableAccountList.TABLE_NAME).whereSimple("account_type_name = ?",accountTypeName).parseList()
+                select(DatabaseOpenHelper.TableAccountList.TABLE_NAME).whereSimple("account_type_name = ?", accountTypeName).parseList()
             }
             parseList.forEach {
-                mutableList.add(AccountList(it[0] as String, it[1] as String,it[2] as String,it[3] as String,it[4] as String,it[5] as String,it[6] as String))
+                mutableList.add(AccountList(it[0] as String, it[1] as String, it[2] as String, it[3] as String, it[4] as String, it[5] as String, it[6] as String))
             }
             return@use mutableList
         }
     }
+
+
 }
