@@ -27,7 +27,7 @@ mvp+dagger+kotlin练手项目。
 - implementation 'com.uber.autodispose:autodispose-android-archcomponents-ktx:1.2.0'</br>
   implementation 'com.uber.autodispose:autodispose-lifecycle-ktx:1.2.0'  //autodispose管理rxjava生命周期
 
-- implementation 'com.tencent.soter:soter-wrapper:1.3.12'  //腾讯指纹解锁
+- implementation 'com.tencent.soter:soter-wrapper:2.0.0'  //腾讯指纹解锁
 
 </br></br></br></br></br></br>
 
